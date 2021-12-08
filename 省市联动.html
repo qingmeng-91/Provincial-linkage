@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>省市联动</title>
+    <style>
+        body {
+            padding: 32px;
+            font-size: 18px;
+        }
+        
+        .tijiao {
+            /* 背景颜色 */
+            background-color: #2196f3;
+            /* 字体颜色 */
+            color: #fff;
+            /* 宽度 */
+            width: 70px;
+            /* 高度 */
+            height: 30px;
+            /* 文字居中 */
+            text-align: center;
+            /* 鼠标小手 */
+            cursor: pointer;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        /* 省市展示 */
+        
+        p.zhanshi {
+            font-weight: 700;
+            font-size: 24px;
+        }
+        
+        select,
+        select option {
+            font-size: 18px;
+        }
+        
+        select {
+            padding: 5px;
+            width: 180px;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <form name="form1">
+        省份:
+        <select name="province" id="province" onchange="changeSelect(this.selectedIndex)"></select> 地区:
+        <select name="city" id="city"></select>
+    </form>
+    <button class="tijiao" onclick="tijiao()">提交</button>
+    <p class="zhanshi">
+        <span>已选择:</span> [ <span name="textTi" id="textTi"></span> ]
+    </p>
+    <script type="text/javascript">
+        var textTi = document.getElementById("textTi");
+
+        function tijiao() {
+            textTi.innerHTML = province.value + "-----" + city.value;
+        }
+        var arr_province = [
+            "请选择省/城市",
+            "河南省",
+            "北京市",
+            "上海市",
+            "天津市",
+            "重庆市",
+            "深圳市",
+            "广东省",
+        ];
+        var arr_city = [
+            ["请选择城市/地区"],
+            ["郑州市", "新乡市", "南阳市", "紫荆山", "周口市", "鹿邑县"],
+            [
+                "东城区",
+                "西城区",
+                "朝阳区",
+                "宣武区",
+                "昌平区",
+                "大兴区",
+                "丰台区",
+                "海淀区",
+            ],
+            [
+                "宝山区",
+                "长宁区",
+                "丰贤区",
+                "虹口区",
+                "黄浦区",
+                "青浦区",
+                "南汇区",
+                "徐汇区",
+                "卢湾区",
+            ],
+            [
+                "和平区",
+                "河西区",
+                "南开区",
+                "河北区",
+                "河东区",
+                "红桥区",
+                "塘古区",
+                "开发区",
+            ],
+            [
+                "俞中区",
+                "南岸区",
+                "江北区",
+                "沙坪坝区",
+                "九龙坡区",
+                "渝北区",
+                "大渡口区",
+                "北碚区",
+            ],
+            ["测试1区", "测试2区", "测试4区", "龙岗区", "南山区", "深圳周边"],
+            ["广州市", "惠州市", "汕头市", "珠海市", "佛山市", "中山市", "东莞市"],
+        ];
+        //网页加载完成，初始化菜单
+        window.onload = init;
+        console.log(window);
+        // 传入函数地址
+        function init() {
+            //首先获取对象
+            var province = document.form1.province;
+            var city = document.form1.city;
+
+            // 指定省份中 < option > 标记的个数
+            province.length = arr_province.length;
+
+            //  循环将数组中的数据写入 < option > 标记中
+            console.log(province.options);
+            for (var i = 0; i < arr_province.length; i++) {
+                province.options[i].text = arr_province[i];
+                province.options[i].value = arr_province[i];
+            }
+
+            // 页面首次渲染 修改省份列表的默认选择项 第一个
+            var index = 0;
+            province.selectedIndex = index;
+            // 指定城市中 < option > 标记的个数
+            city.length = arr_city[index].length;
+            for (var j = 0; j < arr_city[index].length; j++) {
+                city.options[j].text = arr_city[index][j];
+                city.options[j].value = arr_city[index][j];
+            }
+            // tijiao() 页面进来默认选择省市
+            this.tijiao();
+        }
+
+        function changeSelect(index) {
+            // 指定城市中 < option > 标记的个数
+            city.length = arr_city[index].length;
+            //  选择对象
+            // 修改省份列表的选择项
+            console.log(city);
+            console.log(index);
+            console.log(city.options);
+            for (var j = 0; j < arr_city[index].length; j++) {
+                city.options[j].text = arr_city[index][j];
+                city.options[j].value = arr_city[index][j];
+            }
+        }
+    </script>
+</body>
+
+</html>
